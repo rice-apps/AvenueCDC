@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AvenueCDC Call Report</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+        margin: 2rem auto;
+        max-width: 56rem;
+        padding: 0 1rem;
+      }
+
+      .details {
+        display: grid;
+        gap: 0.5rem 1rem;
+        grid-template-columns: max-content 1fr;
+      }
+
+      .details dt {
+        font-weight: 700;
+      }
+
+      .summary {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .summary-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      }
+
+      .summary-item h3 {
+        font-size: 1rem;
+        margin: 0 0 0.35rem;
+      }
+
+      .summary-item p,
+      .summary-item ul {
+        margin: 0;
+      }
+
+      .summary-item ul {
+        padding-left: 1.25rem;
+      }
+
+      .chat-session {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .chat-message {
+        background: white;
+        border: 1px solid #dbeafe;
+        border-radius: 0.35rem;
+        margin: 0.75rem 0;
+        padding: 0.75rem 1rem;
+      }
+
+      .chat-message p {
+        margin: 0.25rem 0 0;
+      }
+
+      pre {
+        background: #f4f4f5;
+        border-radius: 0.35rem;
+        overflow-x: auto;
+        padding: 1rem;
+        white-space: pre-wrap;
+      }
+
+      .missing {
+        color: #71717a;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>AvenueCDC Call Report</h1>
+
+    <h2>Report summary</h2>
+    <section class="summary">
+      
+      
+      <p>Renter with two children is 2 months ($2,900) behind on rent after a job loss. Landlord deadline is Oct 15 before possible eviction filing. Income is $1,700/month against $1,450 rent. Transferred to a housing counselor for emergency rental assistance.</p>
+      
+      <div class="summary-grid">
+        <div class="summary-item">
+          <h3>Next steps</h3>
+          
+          
+          <ul>
+            
+            <li>Start emergency rental assistance application</li>
+            
+            <li>Contact landlord before Oct 15 about pending assistance</li>
+            
+          </ul>
+          
+          
+        </div>
+
+        <div class="summary-item">
+          <h3>Documents needed</h3>
+          
+          
+          <ul>
+            
+            <li>Lease</li>
+            
+            <li>Landlord notice</li>
+            
+            <li>Proof of income</li>
+            
+            <li>Photo ID</li>
+            
+          </ul>
+          
+          
+        </div>
+
+        <div class="summary-item">
+          <h3>Assistance type</h3>
+          <p>rental_assistance</p>
+        </div>
+
+        <div class="summary-item">
+          <h3>Possible programs</h3>
+          
+          
+          <ul>
+            
+            <li>Emergency rental assistance</li>
+            
+            <li>Eviction prevention / landlord mediation</li>
+            
+          </ul>
+          
+          
+        </div>
+
+        <div class="summary-item">
+          <h3>Urgency</h3>
+          <p>high</p>
+        </div>
+      </div>
+      
+    </section>
+
+    <h2>Chat session</h2>
+    <section class="chat-session">
+      
+      
+      <p><strong>Session ID:</strong> sess_a71f3c09d2e84b66</p>
+      
+      
+      
+
+      
+      <p class="missing">No chat messages provided.</p>
+      
+      
+    </section>
+
+    <h2>Call details</h2>
+    <dl class="details">
+      <dt>Call ID</dt><dd>call_4c2e91ab-7f3d-4a18-b6e2-91d0c5a7e320</dd>
+      <dt>Caller number</dt><dd>+17135550187</dd>
+      <dt>Language</dt><dd>en-US</dd>
+      <dt>Outcome</dt><dd>routed_to_staff</dd>
+      <dt>Routed to</dt><dd>{&#39;name&#39;: &#39;Angela Price&#39;, &#39;role&#39;: &#39;Housing Counselor&#39;, &#39;department&#39;: &#39;Rental Assistance&#39;}</dd>
+      <dt>Call start</dt><dd>2026-10-05T10:14:02-05:00</dd>
+      <dt>Call end</dt><dd>2026-10-05T10:19:30-05:00</dd>
+    </dl>
+
+    <h2>Intake data</h2>
+    
+    <dl class="details">
+      
+      <dt>Full Name</dt>
+      <dd>Robert Johnson</dd>
+      
+      <dt>Callback Number</dt>
+      <dd>+17135550187</dd>
+      
+      <dt>City</dt>
+      <dd>Houston, TX</dd>
+      
+      <dt>Housing Status</dt>
+      <dd>renter</dd>
+      
+      <dt>Monthly Rent</dt>
+      <dd>1450</dd>
+      
+      <dt>Months Behind</dt>
+      <dd>2</dd>
+      
+      <dt>Amount Owed</dt>
+      <dd>2900</dd>
+      
+      <dt>Eviction Status</dt>
+      <dd>pay_or_vacate_notice</dd>
+      
+      <dt>Notice Deadline</dt>
+      <dd>2026-10-15</dd>
+      
+      <dt>Hardship Reason</dt>
+      <dd>job_loss</dd>
+      
+      <dt>Monthly Household Income</dt>
+      <dd>1700</dd>
+      
+      <dt>Household Size</dt>
+      <dd>3</dd>
+      
+      <dt>Minors In Household</dt>
+      <dd>2</dd>
+      
+      <dt>Consent To Contact</dt>
+      <dd>true</dd>
+      
+    </dl>
+    
+
+    <h2>Transcript</h2>
+    
+    <div class="transcript">
+      
+      
+      <p><strong>agent:</strong>  test test Thank you for calling Community Housing Support. My name is Sarah. How can I help you today?</p>
+      
+      <p><strong>caller:</strong> Hi, I&#39;m having trouble paying rent and wanted to see if there are programs that could help.</p>
+      
+      <p><strong>agent:</strong> I can help with that. What is your name, and what city do you live in?</p>
+      
+      <p><strong>caller:</strong> Robert Johnson. Houston, Texas.</p>
+      
+      <p><strong>agent:</strong> Are you renting, and how much is your monthly rent?</p>
+      
+      <p><strong>caller:</strong> I rent an apartment. It&#39;s $1,450 a month.</p>
+      
+      <p><strong>agent:</strong> Are you behind on rent?</p>
+      
+      <p><strong>caller:</strong> About two months. I owe around $2,900.</p>
+      
+      <p><strong>agent:</strong> Have you received an eviction notice from your landlord?</p>
+      
+      <p><strong>caller:</strong> Not yet. They sent a notice saying I need to pay by October 15th or they may start the eviction process.</p>
+      
+      <p><strong>agent:</strong> What caused you to fall behind?</p>
+      
+      <p><strong>caller:</strong> I lost my warehouse job in August. I&#39;m on unemployment and doing some delivery work, about $1,700 a month total.</p>
+      
+      <p><strong>agent:</strong> How many people live in your household?</p>
+      
+      <p><strong>caller:</strong> Three. Me and my two kids, eight and twelve.</p>
+      
+      <p><strong>agent:</strong> Thank you. You may qualify for emergency rental assistance and eviction prevention. Is this number the best way to reach you, and may our team contact you about your case?</p>
+      
+      <p><strong>caller:</strong> Yes to both. I just don&#39;t want us to lose the apartment.</p>
+      
+      <p><strong>agent:</strong> Understood. Since your deadline is the 15th, I&#39;m connecting you with a housing counselor now. Please have your lease and the landlord&#39;s notice ready.</p>
+      
+      <p><strong>system:</strong> [Transferred to Angela Price, Rental Assistance]</p>
+      
+      
+    </div>
+    
+
+  </body>
+</html>
