@@ -1,0 +1,64 @@
+{
+  "call_id": "call_4c2e91ab-7f3d-4a18-b6e2-91d0c5a7e320",
+  "caller_number": "+17135550187",
+  "language": "English",
+  "call_start": "2026-10-05T10:14:02-05:00",
+  "call_end": "2026-10-05T10:19:30-05:00",
+  "outcome": "routed_to_staff",
+  "routed_to": {
+    "name": "Angela Price",
+    "role": "Housing Counselor",
+    "department": "Rental Assistance"
+  },
+  "intake": {
+    "full_name": "Robert Johnson",
+    "callback_number": "+17135550187",
+    "city": "Houston, TX",
+    "housing_status": "renter",
+    "monthly_rent": 1450,
+    "months_behind": 2,
+    "amount_owed": 2900,
+    "notice_deadline": "2026-10-15",
+    "monthly_household_income": 1700,
+    "household_size": 3,
+    "minors_in_household": 2,
+    "consent_to_contact": true
+  },
+  "transcript": [
+    { "speaker": "Agent", "text": "Thank you for calling Community Housing Support. My name is Sarah. How can I help you today?" },
+    { "speaker": "Caller", "text": "Hi, I'm having trouble paying rent and wanted to see if there are programs that could help." },
+    { "speaker": "Agent", "text": "I can help with that. What is your name, and what city do you live in?" },
+    { "speaker": "Caller", "text": "Robert Johnson. Houston, Texas." },
+    { "speaker": "Agent", "text": "Are you renting, and how much is your monthly rent?" },
+    { "speaker": "Caller", "text": "I rent an apartment. It's $1,450 a month." },
+    { "speaker": "Agent", "text": "Are you behind on rent?" },
+    { "speaker": "Caller", "text": "About two months. I owe around $2,900." },
+    { "speaker": "Agent", "text": "Have you received an eviction notice from your landlord?" },
+    { "speaker": "Caller", "text": "Not yet. They sent a notice saying I need to pay by October 15th or they may start the eviction process." },
+    { "speaker": "Agent", "text": "What caused you to fall behind?" },
+    { "speaker": "Caller", "text": "I lost my warehouse job in August. I'm on unemployment and doing some delivery work, about $1,700 a month total." },
+    { "speaker": "Agent", "text": "How many people live in your household?" },
+    { "speaker": "Caller", "text": "Three. Me and my two kids, eight and twelve." },
+    { "speaker": "Agent", "text": "Thank you. You may qualify for emergency rental assistance and eviction prevention. Is this number the best way to reach you, and may our team contact you about your case?" },
+    { "speaker": "Caller", "text": "Yes to both. I just don't want us to lose the apartment." },
+    { "speaker": "Agent", "text": "Understood. Since your deadline is the 15th, I'm connecting you with a housing counselor now. Please have your lease and the landlord's notice ready." },
+    { "speaker": "System", "text": "[Transferred to Angela Price, Rental Assistance]" }
+  ],
+  "report": {
+    "summary": "Renter with two children is 2 months ($2,900) behind on rent after a job loss. Landlord deadline is Oct 15 before possible eviction filing. Income is $1,700/month against $1,450 rent. Transferred to a housing counselor for emergency rental assistance.",
+    "assistance_type": "rental_assistance",
+    "urgency": "high",
+    "possible_programs": ["Emergency rental assistance", "Eviction prevention / landlord mediation"],
+    "documents_needed": ["Lease", "Landlord notice", "Proof of income", "Photo ID"],
+    "next_steps": [
+      "Start emergency rental assistance application",
+      "Contact landlord before Oct 15 about pending assistance"
+    ]
+  },
+  "chat_session": {
+    "session_id": "sess_a71f3c09d2e84b66",
+    "channel": "voice",
+    "agent_name": "Sarah",
+    "message_count": 18
+  }
+}

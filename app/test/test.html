@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="English">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AvenueCDC Call Report</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+        margin: 2rem auto;
+        max-width: 56rem;
+        padding: 0 1rem;
+      }
+
+      .details {
+        display: grid;
+        gap: 0.5rem 1rem;
+        grid-template-columns: max-content 1fr;
+      }
+
+      .details dt {
+        font-weight: 700;
+      }
+
+      .summary {
+        background: #f0fdf4;
+        border: 1px solid #f7bbbb;
+        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .summary-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      }
+
+      .summary-item h3 {
+        font-size: 1rem;
+        margin: 0 0 0.35rem;
+      }
+
+      .summary-item p,
+      .summary-item ul {
+        margin: 0;
+      }
+
+      .summary-item ul {
+        padding-left: 1.25rem;
+      }
+
+      .chat-session {
+        background: #eff6ff;
+        border: 1px solid #febfbf;
+        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .chat-message {
+        background: white;
+        border: 1px solid #b7a8fb;
+        border-radius: 0.35rem;
+        margin: 0.75rem 0;
+        padding: 0.75rem 1rem;
+      }
+
+      .chat-message p {
+        margin: 0.25rem 0 0;
+      }
+
+      pre {
+        background: #f4f4f5;
+        border-radius: 0.35rem;
+        overflow-x: auto;
+        padding: 1rem;
+        white-space: pre-wrap;
+      }
+
+      .missing {
+        color: #71717a;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>AvenueCDC Call Report</h1>
+
+    <h2>Report summary</h2>
+    <section class="summary">
+      {% if report is mapping %}
+      {% if report.summary %}
+      <p>{{ report.summary }}</p>
+      {% endif %}
+      <div class="summary-grid">
+        <div class="summary-item">
+          <h3>Next steps</h3>
+          {% if report.next_steps %}
+          {% if report.next_steps is string %}
+          <p>{{ report.next_steps }}</p>
+          {% else %}
+          <ul>
+            {% for step in report.next_steps %}
+            <li>{{ step }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% else %}
+          <p class="missing">Not provided</p>
+          {% endif %}
+        </div>
+
+        <div class="summary-item">
+          <h3>Documents needed</h3>
+          {% if report.documents_needed %}
+          {% if report.documents_needed is string %}
+          <p>{{ report.documents_needed }}</p>
+          {% else %}
+          <ul>
+            {% for document in report.documents_needed %}
+            <li>{{ document }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% else %}
+          <p class="missing">Not provided</p>
+          {% endif %}
+        </div>
+
+        <div class="summary-item">
+          <h3>Assistance type</h3>
+          <p>{{ report.assistance_type or "Not provided" }}</p>
+        </div>
+
+        <div class="summary-item">
+          <h3>Possible programs</h3>
+          {% if report.possible_programs %}
+          {% if report.possible_programs is string %}
+          <p>{{ report.possible_programs }}</p>
+          {% else %}
+          <ul>
+            {% for program in report.possible_programs %}
+            <li>{{ program }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% else %}
+          <p class="missing">Not provided</p>
+          {% endif %}
+        </div>
+
+        <div class="summary-item">
+          <h3>Urgency</h3>
+          <p>{{ report.urgency or "Not provided" }}</p>
+        </div>
+      </div>
+      {% elif report %}
+      <p>{{ report }}</p>
+      {% else %}
+      <p class="missing">No report summary provided.</p>
+      {% endif %}
+    </section>
+
+    <h2>Chat session</h2>
+    <section class="chat-session">
+      {% if chat_session is mapping %}
+      {% if chat_session.session_id %}
+      <p><strong>Session ID:</strong> {{ chat_session.session_id }}</p>
+      {% endif %}
+      {% if chat_session.started_at %}
+      <p><strong>Started:</strong> {{ chat_session.started_at }}</p>
+      {% endif %}
+      {% if chat_session.ended_at %}
+      <p><strong>Ended:</strong> {{ chat_session.ended_at }}</p>
+      {% endif %}
+
+      {% if chat_session.messages %}
+      <h3>Messages</h3>
+      {% for message in chat_session.messages %}
+      <article class="chat-message">
+        {% if message is mapping %}
+        <strong>{{ message.speaker or message.role or message.sender or "Participant" }}</strong>
+        <p>{{ message.text or message.content or message.message or "No message content" }}</p>
+        {% else %}
+        <p>{{ message }}</p>
+        {% endif %}
+      </article>
+      {% endfor %}
+      {% else %}
+      <p class="missing">No chat messages provided.</p>
+      {% endif %}
+      {% elif chat_session is string %}
+      <p>{{ chat_session }}</p>
+      {% elif chat_session %}
+      <p>{{ chat_session }}</p>
+      {% else %}
+      <p class="missing">No chat session provided.</p>
+      {% endif %}
+    </section>
+
+    <h2>Call details</h2>
+    <dl class="details">
+      <dt>Call ID</dt><dd>{{ call_id or "Not provided" }}</dd>
+      <dt>Caller number</dt><dd>{{ caller_number | phone }}</dd>
+      <dt>Language</dt><dd>{{ language or "Not provided" }}</dd>
+      <dt>Outcome</dt><dd>{{ outcome or "Not provided" }}</dd>
+      <dt>Routed to</dt><dd>{{ routed_to.name }}; {{ routed_to.role }}; {{ routed_to.department }}</dd>
+      <dt>Call start</dt><dd>{{ call_start | datetime }}</dd>
+      <dt>Call end</dt><dd>{{ call_end | datetime }}</dd>
+    </dl>
+    <!-- Note that, in intake data, we use a loop to dynamically sort through JSON data and find appropriate parameters to display in the HTML. meanwhile, we have explicit, individually rendered fields like call_id and caller_number that are less json-specific and more universal, so they are declared explicitly -->
+    <h2>Intake data</h2>
+    {% if intake %}
+    <dl class="details">
+      {% for key, value in intake.items() %}
+      <dt>{{ key|replace("_", " ")|title }}</dt>
+      <dd>{{ value if value is string else value|tojson }}</dd>
+      {% endfor %}
+    </dl>
+    {% else %}
+    <p class="missing">No intake data provided.</p>
+    {% endif %}
+
+    <h2>Transcript</h2>
+    {% if transcript %}
+    <div class="transcript">
+      {% if transcript is string %}
+      <p>{{ transcript }}</p>
+      {% else %}
+      {% for message in transcript %}
+      <p><strong>{{ message.speaker or message.role or message.sender or "Participant" }}:</strong> {{ message.text or message.content or message.message or "No message content" }}</p>
+      {% endfor %}
+      {% endif %}
+    </div>
+    {% else %}
+    <p class="missing">No transcript provided.</p>
+    {% endif %}
+
+  </body>
+</html>
