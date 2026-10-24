@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="English">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
 
       .summary {
         background: #f0fdf4;
-        border: 1px solid #bbf7d0;
+        border: 1px solid #f7bbbb;
         border-radius: 0.5rem;
         padding: 1rem 1.25rem;
       }
@@ -52,14 +52,14 @@
 
       .chat-session {
         background: #eff6ff;
-        border: 1px solid #bfdbfe;
+        border: 1px solid #febfbf;
         border-radius: 0.5rem;
         padding: 1rem 1.25rem;
       }
 
       .chat-message {
         background: white;
-        border: 1px solid #dbeafe;
+        border: 1px solid #b7a8fb;
         border-radius: 0.35rem;
         margin: 0.75rem 0;
         padding: 0.75rem 1rem;
@@ -172,14 +172,14 @@
     <h2>Call details</h2>
     <dl class="details">
       <dt>Call ID</dt><dd>call_4c2e91ab-7f3d-4a18-b6e2-91d0c5a7e320</dd>
-      <dt>Caller number</dt><dd>+17135550187</dd>
-      <dt>Language</dt><dd>en-US</dd>
+      <dt>Caller number</dt><dd>+1 (713) 555-0187</dd>
+      <dt>Language</dt><dd>English</dd>
       <dt>Outcome</dt><dd>routed_to_staff</dd>
-      <dt>Routed to</dt><dd>{&#39;name&#39;: &#39;Angela Price&#39;, &#39;role&#39;: &#39;Housing Counselor&#39;, &#39;department&#39;: &#39;Rental Assistance&#39;}</dd>
-      <dt>Call start</dt><dd>2026-10-05T10:14:02-05:00</dd>
-      <dt>Call end</dt><dd>2026-10-05T10:19:30-05:00</dd>
+      <dt>Routed to</dt><dd>Angela Price; Housing Counselor; Rental Assistance</dd>
+      <dt>Call start</dt><dd>October 05, 2026 10:14 AM</dd>
+      <dt>Call end</dt><dd>October 05, 2026 10:19 AM</dd>
     </dl>
-
+    <!-- Note that, in intake data, we use a loop to dynamically sort through JSON data and find appropriate parameters to display in the HTML. meanwhile, we have explicit, individually rendered fields like call_id and caller_number that are less json-specific and more universal, so they are declared explicitly -->
     <h2>Intake data</h2>
     
     <dl class="details">
@@ -205,14 +205,8 @@
       <dt>Amount Owed</dt>
       <dd>2900</dd>
       
-      <dt>Eviction Status</dt>
-      <dd>pay_or_vacate_notice</dd>
-      
       <dt>Notice Deadline</dt>
       <dd>2026-10-15</dd>
-      
-      <dt>Hardship Reason</dt>
-      <dd>job_loss</dd>
       
       <dt>Monthly Household Income</dt>
       <dd>1700</dd>
@@ -234,41 +228,41 @@
     <div class="transcript">
       
       
-      <p><strong>agent:</strong>  test test Thank you for calling Community Housing Support. My name is Sarah. How can I help you today?</p>
+      <p><strong>Agent:</strong> Thank you for calling Community Housing Support. My name is Sarah. How can I help you today?</p>
       
-      <p><strong>caller:</strong> Hi, I&#39;m having trouble paying rent and wanted to see if there are programs that could help.</p>
+      <p><strong>Caller:</strong> Hi, I&#39;m having trouble paying rent and wanted to see if there are programs that could help.</p>
       
-      <p><strong>agent:</strong> I can help with that. What is your name, and what city do you live in?</p>
+      <p><strong>Agent:</strong> I can help with that. What is your name, and what city do you live in?</p>
       
-      <p><strong>caller:</strong> Robert Johnson. Houston, Texas.</p>
+      <p><strong>Caller:</strong> Robert Johnson. Houston, Texas.</p>
       
-      <p><strong>agent:</strong> Are you renting, and how much is your monthly rent?</p>
+      <p><strong>Agent:</strong> Are you renting, and how much is your monthly rent?</p>
       
-      <p><strong>caller:</strong> I rent an apartment. It&#39;s $1,450 a month.</p>
+      <p><strong>Caller:</strong> I rent an apartment. It&#39;s $1,450 a month.</p>
       
-      <p><strong>agent:</strong> Are you behind on rent?</p>
+      <p><strong>Agent:</strong> Are you behind on rent?</p>
       
-      <p><strong>caller:</strong> About two months. I owe around $2,900.</p>
+      <p><strong>Caller:</strong> About two months. I owe around $2,900.</p>
       
-      <p><strong>agent:</strong> Have you received an eviction notice from your landlord?</p>
+      <p><strong>Agent:</strong> Have you received an eviction notice from your landlord?</p>
       
-      <p><strong>caller:</strong> Not yet. They sent a notice saying I need to pay by October 15th or they may start the eviction process.</p>
+      <p><strong>Caller:</strong> Not yet. They sent a notice saying I need to pay by October 15th or they may start the eviction process.</p>
       
-      <p><strong>agent:</strong> What caused you to fall behind?</p>
+      <p><strong>Agent:</strong> What caused you to fall behind?</p>
       
-      <p><strong>caller:</strong> I lost my warehouse job in August. I&#39;m on unemployment and doing some delivery work, about $1,700 a month total.</p>
+      <p><strong>Caller:</strong> I lost my warehouse job in August. I&#39;m on unemployment and doing some delivery work, about $1,700 a month total.</p>
       
-      <p><strong>agent:</strong> How many people live in your household?</p>
+      <p><strong>Agent:</strong> How many people live in your household?</p>
       
-      <p><strong>caller:</strong> Three. Me and my two kids, eight and twelve.</p>
+      <p><strong>Caller:</strong> Three. Me and my two kids, eight and twelve.</p>
       
-      <p><strong>agent:</strong> Thank you. You may qualify for emergency rental assistance and eviction prevention. Is this number the best way to reach you, and may our team contact you about your case?</p>
+      <p><strong>Agent:</strong> Thank you. You may qualify for emergency rental assistance and eviction prevention. Is this number the best way to reach you, and may our team contact you about your case?</p>
       
-      <p><strong>caller:</strong> Yes to both. I just don&#39;t want us to lose the apartment.</p>
+      <p><strong>Caller:</strong> Yes to both. I just don&#39;t want us to lose the apartment.</p>
       
-      <p><strong>agent:</strong> Understood. Since your deadline is the 15th, I&#39;m connecting you with a housing counselor now. Please have your lease and the landlord&#39;s notice ready.</p>
+      <p><strong>Agent:</strong> Understood. Since your deadline is the 15th, I&#39;m connecting you with a housing counselor now. Please have your lease and the landlord&#39;s notice ready.</p>
       
-      <p><strong>system:</strong> [Transferred to Angela Price, Rental Assistance]</p>
+      <p><strong>System:</strong> [Transferred to Angela Price, Rental Assistance]</p>
       
       
     </div>

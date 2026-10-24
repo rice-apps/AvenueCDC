@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="English">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
 
       .summary {
         background: #f0fdf4;
-        border: 1px solid #bbf7d0;
+        border: 1px solid #f7bbbb;
         border-radius: 0.5rem;
         padding: 1rem 1.25rem;
       }
@@ -52,14 +52,14 @@
 
       .chat-session {
         background: #eff6ff;
-        border: 1px solid #bfdbfe;
+        border: 1px solid #febfbf;
         border-radius: 0.5rem;
         padding: 1rem 1.25rem;
       }
 
       .chat-message {
         background: white;
-        border: 1px solid #dbeafe;
+        border: 1px solid #b7a8fb;
         border-radius: 0.35rem;
         margin: 0.75rem 0;
         padding: 0.75rem 1rem;
@@ -200,14 +200,14 @@
     <h2>Call details</h2>
     <dl class="details">
       <dt>Call ID</dt><dd>{{ call_id or "Not provided" }}</dd>
-      <dt>Caller number</dt><dd>{{ caller_number or "Not provided" }}</dd>
+      <dt>Caller number</dt><dd>{{ caller_number | phone }}</dd>
       <dt>Language</dt><dd>{{ language or "Not provided" }}</dd>
       <dt>Outcome</dt><dd>{{ outcome or "Not provided" }}</dd>
-      <dt>Routed to</dt><dd>{{ routed_to or "Not provided" }}</dd>
-      <dt>Call start</dt><dd>{{ call_start or "Not provided" }}</dd>
-      <dt>Call end</dt><dd>{{ call_end or "Not provided" }}</dd>
+      <dt>Routed to</dt><dd>{{ routed_to.name }}; {{ routed_to.role }}; {{ routed_to.department }}</dd>
+      <dt>Call start</dt><dd>{{ call_start | datetime }}</dd>
+      <dt>Call end</dt><dd>{{ call_end | datetime }}</dd>
     </dl>
-
+    <!-- Note that, in intake data, we use a loop to dynamically sort through JSON data and find appropriate parameters to display in the HTML. meanwhile, we have explicit, individually rendered fields like call_id and caller_number that are less json-specific and more universal, so they are declared explicitly -->
     <h2>Intake data</h2>
     {% if intake %}
     <dl class="details">

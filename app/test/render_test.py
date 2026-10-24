@@ -2,6 +2,7 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+from datetime import datetime
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -17,6 +18,25 @@ def load_call_data(json_path: Path) -> dict[str, Any]:
         raise ValueError("The JSON document must contain an object at its top level.")
     return data
 
+def format_datetime(value, fmt="%B %d, %Y %I:%M %p"):
+    """Format an ISO 8601 timestamp; return the original value if it can't be parsed."""
+    if not value:
+        return ""
+    try:
+        return datetime.fromisoformat(value).strftime(fmt)
+    except (TypeError, ValueError):
+        return value
+
+def format_phone(value):
+    """Format a US phone number as +1 (XXX) XXX-XXXX; return the original value otherwise."""
+    if not value:
+        return ""
+    digits = "".join(ch for ch in str(value) if ch.isdigit())
+    if len(digits) == 11 and digits.startswith("1"):
+        digits = digits[1:]
+    if len(digits) != 10:
+        return value
+    return f"+1 ({digits[:3]}) {digits[3:6]}-{digits[6:]}"
 
 def render_call_report(call_data: dict[str, Any]) -> str:
     """Render call data into HTML using the local Jinja template."""
@@ -25,6 +45,8 @@ def render_call_report(call_data: dict[str, Any]) -> str:
         loader=FileSystemLoader(template_directory),
         autoescape=select_autoescape(["html", "xml"]),
     )
+    environment.filters["datetime"] = format_datetime
+    environment.filters["phone"] = format_phone
     template = environment.get_template("test.html")
 
     context = {
