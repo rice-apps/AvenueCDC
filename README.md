@@ -16,7 +16,7 @@ avenuecdc/
     └── chat/ # single routes & webhook (chatbot)
     └── intake/ # fastapi endpoints
     └── reports/ # jinja report/package building
-    └── tests/ # in Claude we trust?
+    └── tests/ # :)
 ├── db/ # database updates, seeding
 ├── main.py
 ├── .env
