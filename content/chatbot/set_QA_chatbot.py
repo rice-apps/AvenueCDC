@@ -46,7 +46,7 @@ ES_options_dict = {
 
 language = "EN"
 
-def get_response(question, language="EN"):
+def get_response(question, language=language):
     """
     Gets a respone from the chatbot based on the question and language provided.
 
@@ -72,7 +72,7 @@ def get_response(question, language="EN"):
     else:
         raise ValueError(f"Language '{language}' is not supported. Please use 'EN' for English or 'ES' for Spanish.")
 
-def get_next_options(question, language="EN"):
+def get_next_options(question, language=language):
     """
     Gets the next options for the chatbot based on the question and language provided.
 
