@@ -1,0 +1,26 @@
+[project]
+name = "avenuecdc"
+version = "0.1.0"
+requires-python = ">=3.13"
+readme = "README.md"
+dependencies = [
+    "fastapi",
+    "httpx",
+    "uvicorn[standard]",
+    "pydantic-settings",
+    "python-multipart",
+    "elevenlabs",
+    "twilio",
+    "supabase",
+    "jinja2",
+    "docusign-esign",
+    "google-genai",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "faker",
+    "ruff",
+]
