@@ -3,11 +3,26 @@ name = "avenuecdc"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.13"
 dependencies = [
+    "docusign-esign",
     "elevenlabs>=2.75.0",
     "fastapi>=0.162.0",
+    "google-genai",
+    "httpx",
+    "jinja2",
     "pydantic>=2.14.1",
+    "pydantic-settings",
+    "python-multipart",
+    "supabase",
     "twilio>=9.12.0",
-    "uvicorn>=0.54.0",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "faker",
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
 ]

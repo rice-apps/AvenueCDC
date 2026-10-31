@@ -1,8 +1,47 @@
 # AvenueCDC
 Official AvenueCDC repo.
 
+## Setup
+
+### Install `uv`:
+
+For Mac/Linux:
+```bash
+brew install uv
+``` 
+OR 
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+For Windows:
+```bash
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+OR
+```bash
+winget install --id=astral-sh.uv  -e
+```
+
+### Install dependencies:
+
+This creates `.venv` and installs everything from `pyproject.toml`.
+```bash
+uv sync
+```
+
+To add a package, use `uv add <package>` (or `uv add --dev <package>`), not `pip install`, and commit the updated `pyproject.toml` and `uv.lock`.
+
 ## Startup
--- fill in -- 
+Copy the env template and fill in the values:
+```bash
+cp .env.example .env
+```
+
+Run the server (no need to activate the virtual environment, `uv run` handles it):
+```bash
+uv run uvicorn main:app --reload
+```
 
 ## Repo structure:
 
@@ -16,12 +55,16 @@ avenuecdc/
     └── chat/ # single routes & webhook (chatbot)
     └── intake/ # fastapi endpoints
     └── reports/ # jinja report/package building
-    └── tests/ # :)
+    └── tests/ 
+├── project/
+    └── design.md # project architecture
 ├── db/ # database updates, seeding
 ├── main.py
 ├── .env
+├── .env.example
 ├── .gitignore
-├── requirements.txt
+├── pyproject.toml
+├── uv.lock
 └── README.md
 ```
 
@@ -29,7 +72,11 @@ avenuecdc/
 
 ## Branches
 
-Create a new branch each time you start working on a NEW feature. 
+Create a new branch each time you start working on a NEW feature.
+
+**Branch naming scheme:**
+`voice/<feature>` or `chat/<feature>` based on what you're working on.
+
 ```
 git pull
 git switch -c <new branch name>
@@ -44,7 +91,7 @@ Once you have completed working on your feature branch, raise a PR for team lead
 
 ## PRs:
 
-- **PR Title: Add Notion Ticket to the title alongisde a short description**
+- **PR Title: Add Notion Ticket to the title alongside a short description**
 - Features added
 - Dependencies added
 - High-level changes per file
@@ -71,5 +118,4 @@ To learn more about our techstack, please make use of the following:
 
 ## Updated ENV File
 
-For the application to work, please have these variables in your ENV file:
- - TBD
+For the application to work, please have the same variables as [.env.example](.env.example) in your .env file.
