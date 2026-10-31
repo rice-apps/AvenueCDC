@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Widget Demo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Chat Trigger Bubble -->
+    <div class="chat-launcher" id="chatLauncher">💬</div>
+
+    <!-- Chat Popup Window -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Chatbot</span>
+            <button class="chat-close-btn" id="closeChat">&times;</button>
+        </div>
+        
+        <div class="chat-body" id="chatBody">
+            <div class="message bot">Hi! Please select your language / ¡Hola! Por favor seleccione su idioma.</div>
+        </div>
+        
+        <div class="chat-footer">
+            <div class="language-selection-container">
+                <input type="radio" name="language_select" value="EN" id="langEn" checked>
+                <label for="langEn">English</label>
+                
+                <input type="radio" name="language_select" value="ES" id="langEs">
+                <label for="langEs">Español</label>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/widget.js"></script>
+</body>
+</html>
+
