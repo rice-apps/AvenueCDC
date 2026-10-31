@@ -1,1 +1,5 @@
 .env
+tests/__pycache__/test_chatbot.cpython-313.pyc
+content/chatbot/__pycache__/set_QA_chatbot.cpython-311.pyc
+__pycache__/main.cpython-313.pyc
+__pycache__/app.cpython-311.pyc
