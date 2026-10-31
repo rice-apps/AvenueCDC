@@ -18,7 +18,7 @@ We will use the native ElevenLabs–Twilio integration.
 
 - **Twilio:** Receives incoming calls, connects callers to ElevenLabs, and provides call status information.
 - **ElevenLabs:** Conducts conversations, identifies caller needs, provides information, and transfers callers to predefined specialist destinations.
-- **FastAPI:** Collects ElevenLabs post-call data and retrieves Twilio call records.
+- **FastAPI:** Records call identifiers at initialization, processes ElevenLabs post-call data, and retrieves Twilio call records.
 - **Supabase:** Stores combined call records for the employee dashboard.
 
 The backend will not participate in live conversations or determine transfer destinations.
@@ -35,27 +35,27 @@ flowchart TD
     E -->|Transfer when needed| R["Predefined Specialist Numbers"]
     R -.->|Call handled by human| H["HOC Staff"]
 
-    E -->|1. Initiation webhook| API["FastAPI Backend"]
-    E -->|2. Post-call webhook| API
+    E -->|1. Initiation webhook: call identifiers| API["FastAPI Backend"]
+    E -->|2. Post-call webhook: transcript and analysis| API
 
     API -->|3. Fetch call status and transfer legs| T
     T -.->|4. REST API response| API
 
-    API -->|5. Save combined call record| DB[("Supabase")]
+    API -->|5. Insert/update call record| DB[("Supabase")]
     DB -->|6. Query call records| UI["Employee Dashboard"]
 ```
 
 ### Data Flow
 
 1. **Incoming call:** A caller dials either Twilio number. Twilio connects the call to the same ElevenLabs agent.
-2. **Conversation initiation:** ElevenLabs sends an initiation webhook to FastAPI. The backend associates the ElevenLabs conversation ID with the Twilio Call SID.
+2. **Conversation initiation:** ElevenLabs sends an initiation webhook to FastAPI. The backend saves a minimal record associating the ElevenLabs conversation ID with the Twilio Call SID, caller number, and dialed number.
 3. **Conversation and routing:** ElevenLabs handles the caller's request and transfers them to a predefined specialist number when necessary.
-4. **Post-call processing:** ElevenLabs sends the transcript, analysis, and conversation metadata to FastAPI after the conversation ends.
-5. **Twilio lookup:** FastAPI retrieves the final call status and any available transfer call legs from Twilio.
-6. **Storage:** FastAPI combines the provider data and saves it in Supabase.
+4. **Post-call processing:** ElevenLabs sends the `post_call_transcription` webhook containing the transcript, analysis, and conversation metadata.
+5. **Twilio lookup:** FastAPI uses the stored Twilio Call SID to retrieve the final call status and any available transfer call legs.
+6. **Storage:** FastAPI updates the existing Supabase record with the combined provider data.
 7. **Dashboard:** The employee dashboard reads the processed call records from Supabase.
 
-The initiation webhook is a request-response interaction; FastAPI returns the expected conversation initialization response. The Twilio lookup is performed after the conversation, with retries if call information is not yet finalized.
+The initiation webhook is a lightweight request-response interaction used only for call identification. FastAPI returns the expected initialization response without participating in conversation logic. The Twilio lookup is performed after the conversation, with retries if call information is not yet finalized.
 
 ## Call Routing
 
@@ -101,25 +101,29 @@ A connected destination does not necessarily mean a human answered, since voicem
 
 ## Post-Call Processing
 
-We will collect information after the conversation rather than stream it to our backend in real time.
+We will collect conversation information after the call rather than stream it to our backend in real time.
 
 ### 1. Conversation Initiation
 
-ElevenLabs sends a conversation initiation webhook. FastAPI associates the ElevenLabs conversation ID with the Twilio Call SID and saves the caller and dialed numbers.
+ElevenLabs sends an initiation webhook. FastAPI saves a minimal Supabase record containing the ElevenLabs conversation ID, Twilio Call SID, caller number, and dialed number.
+
+No conversation processing or Twilio API lookups occur during initialization.
 
 ### 2. Conversation Completion
 
-ElevenLabs sends a post-call webhook containing the full available AI transcript, conversation metadata, and post-call analysis.
+ElevenLabs sends a `post_call_transcription` webhook containing the full available AI transcript, conversation metadata, and post-call analysis.
+
+FastAPI uses the `conversation_id` to find the existing call record.
 
 ### 3. Twilio Lookup
 
-FastAPI queries Twilio for the final call status and any accessible transfer call legs.
+FastAPI queries Twilio using the stored Call SID to retrieve the final call status and any accessible transfer call legs.
 
 ### 4. Data Storage
 
-FastAPI combines the ElevenLabs and Twilio information into a call record in Supabase.
+FastAPI updates the existing Supabase call record with the combined ElevenLabs and Twilio information.
 
-The backend will verify incoming webhook signatures, avoid duplicate records, and retry Twilio lookups when final call information is not yet available.
+The backend will verify incoming webhook signatures where supported, avoid duplicate records, and retry Twilio lookups when final call information is not yet available.
 
 ## Data Model
 
@@ -149,9 +153,9 @@ For the MVP, we will use a single `calls` table.
 1. Create one ElevenLabs agent and configure its conversational routing rules.
 2. Configure predefined specialist transfer destinations.
 3. Connect two Twilio test numbers to the agent.
-4. Implement ElevenLabs initiation and post-call webhooks in FastAPI.
+4. Implement the lightweight ElevenLabs initiation webhook and `post_call_transcription` webhook in FastAPI.
 5. Implement Twilio call-record retrieval and transfer tracking.
-6. Store combined results in Supabase.
+6. Store and update combined call records in Supabase.
 7. Test normal completion, specialist transfers, unanswered transfers, and calls to both numbers.
 8. Migrate existing business numbers after validating the integration.
 
@@ -167,5 +171,7 @@ For the MVP, we will use a single `calls` table.
 ## Open Technical Validation
 
 The native ElevenLabs–Twilio integration must be tested to confirm whether transfer destination call legs are accessible through Twilio.
+
+We must also verify that the initiation webhook provides the identifiers needed to associate ElevenLabs conversations with Twilio calls.
 
 If a transfer outcome cannot be reliably determined, it will be recorded as `unknown` rather than assuming success or failure.
